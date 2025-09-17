@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Moja strona pod QR</title>
+  <title>My QR Page</title>
   <style>
     body { 
       font-family: Arial, sans-serif; 
@@ -50,14 +50,14 @@
 </head>
 <body>
   <div class="card">
-    <h1>Witaj na mojej stronie!</h1>
-    <p>To jest strona, która wyświetli się po zeskanowaniu mojego kodu QR.</p>
+    <h1>Welcome!</h1>
+    <p>This page appears when you scan my QR code.</p>
 
-    <img src="https://via.placeholder.com/250" alt="Obrazek testowy">
+    <img src="https://via.placeholder.com/250" alt="Sample image">
 
-    <p>Możesz mnie wesprzeć klikając w przycisk poniżej 👇</p>
-    <a class="button" href="https://www.paypal.com/paypalme/twojanazwa" target="_blank">
-      Wesprzyj mnie na PayPal
+    <p>If you’d like to support me, just click the button below 👇</p>
+    <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">
+      Support me on PayPal
     </a>
   </div>
 </body>
