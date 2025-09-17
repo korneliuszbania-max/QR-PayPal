@@ -53,7 +53,7 @@
     <h1>Welcome!</h1>
     <p>This page appears when you scan my QR code.</p>
 
-    <img src="Unknown-2.jpg" alt="Sample image">
+    <img src="https://Users/mac/Downloads" alt="Unknown-2.jpg">
 
     <p>If you’d like to support me, just click the button below 👇</p>
     <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">
