@@ -5,25 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kornel & Ola 💍</title>
 <style>
+  /* Global */
   body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
+    padding: 0;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+  }
+
+  .overlay {
+    background-color: rgba(255,255,255,0.9);
+    min-height: 100vh;
     padding: 20px;
-    background: #f5f5f5;
   }
 
   .card {
     background: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 16px;
     max-width: 800px;
     margin: auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   }
 
-  h1 { margin-bottom: 10px; }
-  p { margin: 10px 0; }
+  h1 { margin-bottom: 10px; color: #444; }
+  p { margin: 10px 0; line-height: 1.5; color: #555; }
 
   /* Slider */
   .carousel-container {
@@ -38,6 +47,7 @@
     border-radius: 12px;
     display: none;
     object-fit: contain;
+    transition: opacity 0.5s;
   }
 
   .carousel-container img.active {
@@ -60,6 +70,24 @@
   .prev { left: 10px; }
   .next { right: 10px; }
 
+  /* Dots */
+  .dots {
+    text-align: center;
+    margin-top: 10px;
+  }
+  .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    background: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .dot.active { background: #0070ba; }
+
+  /* PayPal button */
   a.button {
     display: inline-block;
     margin-top: 20px;
@@ -69,22 +97,28 @@
     text-decoration: none;
     font-weight: bold;
     border-radius: 10px;
+    transition: background 0.3s;
   }
+  a.button:hover { background: #005c95; }
 
+  /* Contact */
   .contact { margin-top: 20px; }
   .contact a { color: #0070ba; text-decoration: none; }
 
   @media (prefers-color-scheme: dark) {
-    body { background: #121212; color: #ddd; }
-    .card { background: #1e1e1e; box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
+    body { color: #ddd; }
+    .card { background: rgba(30,30,30,0.95); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+    .dot.active { background: #00aaff; }
   }
 
   @media (max-width:600px) {
     .prev, .next { font-size: 1.5em; padding: 8px; }
+    .card { padding: 15px; }
   }
 </style>
 </head>
 <body>
+<div class="overlay">
 <div class="card">
   <h1>Welcome to our page 💕</h1>
   <p>Hello, we are Kornel & Ola 🌸<br>
@@ -104,26 +138,51 @@
     <button class="next">&#10095;</button>
   </div>
 
-  <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">Support us on PayPal 💳</a>
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+  <a class="button" href="https://www.paypal.me/kornelola" target="_blank">
+    Support us on PayPal 💳
+  </a>
   <div class="contact">
     <p>Or contact us via email: 📧 <a href="mailto:koja_b@wp.pl">koja_b@wp.pl</a></p>
   </div>
 </div>
+</div>
 
 <script>
 const slides = document.querySelectorAll('.carousel-container img');
+const dots = document.querySelectorAll('.dot');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
 let current = 0;
+let interval;
 
 function showSlide(i){
   slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
   current = (i + slides.length) % slides.length;
   slides[current].classList.add('active');
+  dots[current].classList.add('active');
 }
 
-prevBtn.addEventListener('click', ()=> showSlide(current - 1));
-nextBtn.addEventListener('click', ()=> showSlide(current + 1));
+prevBtn.addEventListener('click', ()=> { showSlide(current-1); resetInterval(); });
+nextBtn.addEventListener('click', ()=> { showSlide(current+1); resetInterval(); });
+dots.forEach((dot, idx)=> { dot.addEventListener('click', ()=> { showSlide(idx); resetInterval(); }); });
+
+function startInterval(){ interval = setInterval(()=>showSlide(current+1), 4000); }
+function resetInterval(){ clearInterval(interval); startInterval(); }
+
+startInterval();
 </script>
 </body>
 </html>
+
