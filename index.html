@@ -9,56 +9,36 @@
     font-family: Arial, sans-serif; 
     text-align: center; 
     padding: 20px; 
-    background: #f5f5f5;
-    margin: 0;
-    transition: background 0.3s, color 0.3s;
+    margin: 0; 
+    background: #f5f5f5; 
   }
   .card {
     background: white;
-    padding: 25px;
+    padding: 20px;
     border-radius: 16px;
     max-width: 800px;
     margin: auto;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: background 0.3s, color 0.3s;
   }
-  h1 {
-    color: #333;
-    font-size: 2em;
-    margin-bottom: 10px;
-    transition: color 0.3s;
-  }
-  p {
-    color: #555;
-    line-height: 1.6;
-    font-size: 1.1em;
-    margin: 15px 0;
-    transition: color 0.3s;
-  }
+  h1 { margin-bottom: 10px; }
+  p { margin: 10px 0; }
 
-  /* Fade carousel */
+  /* Carousel */
   .carousel-container {
     position: relative;
     width: 100%;
     max-width: 600px;
     margin: 20px auto;
-    overflow: hidden;
-    border-radius: 12px;
   }
   .carousel-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: auto;
-    max-height: 80vh;
-    object-fit: contain;
+    display: none;
     border-radius: 12px;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    object-fit: contain;
   }
   .carousel-container img.active {
-    opacity: 1;
+    display: block;
   }
 
   /* Buttons */
@@ -73,7 +53,6 @@
     padding: 10px;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 10;
   }
   .prev { left: 10px; }
   .next { right: 10px; }
@@ -91,10 +70,10 @@
     background: #bbb;
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s;
   }
   .dot.active { background: #0070ba; }
 
+  /* Button */
   a.button {
     display: inline-block;
     margin-top: 20px;
@@ -102,31 +81,23 @@
     background: #0070ba;
     color: white;
     text-decoration: none;
-    font-size: 1.2em;
     font-weight: bold;
     border-radius: 10px;
-    transition: background 0.3s;
   }
-  a.button:hover { background: #005c95; }
+
+  /* Contact */
+  .contact { margin-top: 20px; }
+  .contact a { color: #0070ba; text-decoration: none; }
 
   /* Dark mode */
   @media (prefers-color-scheme: dark) {
     body { background: #121212; color: #ddd; }
     .card { background: #1e1e1e; box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
-    h1 { color: #fff; }
-    p { color: #ccc; }
+    .dot.active { background: #00aaff; }
   }
 
-  /* Contact */
-  .contact { margin-top: 30px; font-size: 1em; color: #555; }
-  .contact a { color: #0070ba; text-decoration: none; }
-  .contact a:hover { text-decoration: underline; }
-
-  @media (max-width: 600px) {
-    .card { padding: 20px; }
-    h1 { font-size: 1.6em; }
-    p { font-size: 1em; }
-    .carousel-container { max-height: 60vh; }
+  @media (max-width:600px) {
+    .prev, .next { font-size: 1.5em; padding: 8px; }
   }
 </style>
 </head>
@@ -137,7 +108,6 @@
   We are planning to get married in 2026 in Poland 💍.<br>
   If you’d like to support us financially with organizing our wedding, we would be extremely grateful! 🙏❤️</p>
 
-  <!-- Fade carousel with buttons -->
   <div class="carousel-container">
     <button class="prev">&#10094;</button>
     <img src="Unknown-3.jpg" alt="Our photo 1" class="active">
@@ -151,7 +121,6 @@
     <button class="next">&#10095;</button>
   </div>
 
-  <!-- Dots -->
   <div class="dots">
     <span class="dot active"></span>
     <span class="dot"></span>
@@ -163,49 +132,40 @@
     <span class="dot"></span>
   </div>
 
-  <p>Click the button below if you’d like to support us 👇</p>
-  <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">
-    Support us on PayPal 💳
-  </a>
-
+  <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">Support us on PayPal 💳</a>
   <div class="contact">
     <p>Or contact us via email: 📧 <a href="mailto:koja_b@wp.pl">koja_b@wp.pl</a></p>
   </div>
 </div>
 
 <script>
-  const slides = document.querySelectorAll('.carousel-container img');
-  const dots = document.querySelectorAll('.dot');
-  const prevBtn = document.querySelector('.prev');
-  const nextBtn = document.querySelector('.next');
-  let current = 0;
-  let slideInterval;
+const slides = document.querySelectorAll('.carousel-container img');
+const dots = document.querySelectorAll('.dot');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+let current = 0;
+let interval;
 
-  function showSlide(i) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = (i + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
+function showSlide(i){
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  current = (i + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+}
 
-  function nextSlide() { showSlide(current + 1); }
-  function prevSlide() { showSlide(current - 1); }
+function nextSlide(){ showSlide(current + 1); }
+function prevSlide(){ showSlide(current - 1); }
 
-  prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
-  nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
+prevBtn.addEventListener('click', ()=>{ prevSlide(); resetInterval(); });
+nextBtn.addEventListener('click', ()=>{ nextSlide(); resetInterval(); });
 
-  dots.forEach((dot, idx) => {
-    dot.addEventListener('click', () => {
-      showSlide(idx);
-      resetInterval();
-    });
-  });
+dots.forEach((dot, idx)=>{ dot.addEventListener('click', ()=>{ showSlide(idx); resetInterval(); }); });
 
-  function startInterval() { slideInterval = setInterval(nextSlide, 4000); }
-  function resetInterval() { clearInterval(slideInterval); startInterval(); }
+function startInterval(){ interval = setInterval(nextSlide,4000); }
+function resetInterval(){ clearInterval(interval); startInterval(); }
 
-  startInterval();
+startInterval();
 </script>
 </body>
 </html>
