@@ -1,111 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My QR Page</title>
-  <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      text-align: center; 
-      padding: 20px; 
-      background: #f5f5f5;
-      margin: 0;
-      transition: background 0.3s, color 0.3s;
-    }
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 16px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: background 0.3s, color 0.3s;
-    }
-    img { 
-      max-width: 100%; 
-      height: auto;
-      margin: 20px auto;
-      display: block;
-      border-radius: 12px; 
-    }
-    h1 {
-      color: #333;
-      font-size: 2em;
-      margin-bottom: 10px;
-      transition: color 0.3s;
-    }
-    p {
-      color: #555;
-      line-height: 1.6;
-      font-size: 1.1em;
-      margin: 15px 0;
-      transition: color 0.3s;
-    }
-    a.button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 24px;
-      background: #0070ba;
-      color: white;
-      text-decoration: none;
-      font-size: 1.2em;
-      font-weight: bold;
-      border-radius: 10px;
-      transition: background 0.3s;
-    }
-    a.button:hover {
-      background: #005c95;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kornel & Ola 💍</title>
+<style>
+  body { 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    padding: 20px; 
+    background: #f5f5f5;
+    margin: 0;
+    transition: background 0.3s, color 0.3s;
+  }
+  .card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: background 0.3s, color 0.3s;
+  }
+  h1 {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+  p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 1.1em;
+    margin: 15px 0;
+    transition: color 0.3s;
+  }
 
-    /* Dark mode */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #121212;
-        color: #ddd;
-      }
-      .card {
-        background: #1e1e1e;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      }
-      h1 {
-        color: #fff;
-      }
-      p {
-        color: #ccc;
-      }
-    }
+  /* Fade carousel */
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .carousel-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  .carousel-container img.active {
+    opacity: 1;
+  }
 
-    /* Mobile adjustments */
-    @media (max-width: 600px) {
-      .card {
-        padding: 20px;
-      }
-      h1 {
-        font-size: 1.6em;
-      }
-      p {
-        font-size: 1em;
-      }
-      a.button {
-        font-size: 1em;
-        width: 100%;
-        padding: 14px 0;
-      }
-    }
-  </style>
+  /* Buttons */
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    font-size: 2em;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .prev { left: 10px; }
+  .next { right: 10px; }
+
+  a.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 24px;
+    background: #0070ba;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background 0.3s;
+  }
+  a.button:hover { background: #005c95; }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    body { background: #121212; color: #ddd; }
+    .card { background: #1e1e1e; box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
+    h1 { color: #fff; }
+    p { color: #ccc; }
+  }
+
+  /* Contact */
+  .contact { margin-top: 30px; font-size: 1em; color: #555; }
+  .contact a { color: #0070ba; text-decoration: none; }
+  .contact a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .card { padding: 20px; }
+    h1 { font-size: 1.6em; }
+    p { font-size: 1em; }
+    .carousel-container { height: 250px; }
+  }
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1>Welcome!</h1>
-    <p>This page appears when you scan my QR code.</p>
+<div class="card">
+  <h1>Welcome to our page 💕</h1>
+  <p>Hello, we are Kornel & Ola 🌸<br>
+  We are planning to get married in 2026 in Poland 💍.<br>
+  If you’d like to support us financially with organizing our wedding, we would be extremely grateful! 🙏❤️</p>
 
-    <img src="Unknown-10.jpg" alt="My photo">
-
-    <p>If you’d like to support me, just click the button below 👇</p>
-    <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">
-      Support me on PayPal
-    </a>
+  <!-- Fade carousel with buttons -->
+  <div class="carousel-container">
+    <button class="prev">&#10094;</button>
+    <img src="Unknown-3.jpg" alt="Our photo 1" class="active">
+    <img src="Unknown-4.jpg" alt="Our photo 2">
+    <img src="Unknown-5.jpg" alt="Our photo 3">
+    <img src="Unknown-6.jpg" alt="Our photo 4">
+    <img src="Unknown-7.jpg" alt="Our photo 5">
+    <img src="Unknown-8.jpg" alt="Our photo 6">
+    <img src="Unknown-9.jpg" alt="Our photo 7">
+    <img src="Unknown.jpg" alt="Our photo 8">
+    
+    <button class="next">&#10095;</button>
   </div>
+
+  <p>Click the button below if you’d like to support us 👇</p>
+  <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">
+    Support us on PayPal 💳
+  </a>
+
+  <div class="contact">
+    <p>Or contact us via email: 📧 <a href="mailto:koja_b@wp.pl">koja_b@wp.pl</a></p>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.carousel-container img');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+  let current = 0;
+  let slideInterval;
+
+  function showSlide(i) {
+    slides[current].classList.remove('active');
+    current = (i + slides.length) % slides.length; // loop
+    slides[current].classList.add('active');
+  }
+
+  function nextSlide() { showSlide(current + 1); }
+  function prevSlide() { showSlide(current - 1); }
+
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    resetInterval();
+  });
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    resetInterval();
+  });
+
+  function startInterval() {
+    slideInterval = setInterval(nextSlide, 4000);
+  }
+
+  function resetInterval() {
+    clearInterval(slideInterval);
+    startInterval();
+  }
+
+  startInterval();
+</script>
 </body>
 </html>
