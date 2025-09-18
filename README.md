@@ -1,63 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>My QR Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Płatność PayPal</title>
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      text-align: center; 
-      padding: 40px; 
-      background: #f5f5f5;
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: linear-gradient(135deg, #f0f4f9, #d9e6f2);
+      color: #333;
     }
     .card {
       background: white;
+      max-width: 500px;
+      margin: auto;
       padding: 30px;
       border-radius: 16px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
     }
-    img { 
-      max-width: 250px; 
-      margin: 20px auto;
-      display: block;
-      border-radius: 12px; 
+    img {
+      max-width: 180px;
+      margin-bottom: 20px;
     }
     h1 {
-      color: #333;
+      font-size: 26px;
+      margin-bottom: 15px;
     }
     p {
-      color: #555;
-      line-height: 1.5;
+      font-size: 18px;
+      margin-bottom: 25px;
     }
-    a.button {
+    a.pay-btn {
       display: inline-block;
-      margin-top: 20px;
-      padding: 14px 24px;
-      background: #0070ba;
+      padding: 15px 30px;
+      background-color: #0070ba;
       color: white;
       text-decoration: none;
       font-size: 18px;
       font-weight: bold;
       border-radius: 10px;
-      transition: background 0.3s;
+      transition: 0.3s;
     }
-    a.button:hover {
-      background: #005c95;
+    a.pay-btn:hover {
+      background-color: #005c97;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Welcome!</h1>
-    <p>This page appears when you scan my QR code.</p>
-
-    <img src="/Users/mac/Downloads" alt="Unknown-2.jpg">
-
-    <p>If you’d like to support me, just click the button below 👇</p>
-    <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">
-      Support me on PayPal
+    <!-- Wstaw tutaj nazwę swojego obrazka -->
+    <img src="logo.png" alt="Moje logo">
+    <h1>Dziękujemy za wsparcie!</h1>
+    <p>Kliknij poniższy przycisk, aby dokonać płatności przez PayPal:</p>
+    <!-- Podmień link na swój PayPal.Me -->
+    <a class="pay-btn" href="https://www.paypal.com/paypalme/TWOJA_NAZWA/50" target="_blank">
+      Zapłać 50 PLN
     </a>
   </div>
 </body>
