@@ -100,7 +100,7 @@
     <h1>Welcome!</h1>
     <p>This page appears when you scan my QR code.</p>
 
-    <img src="https://via.placeholder.com/400" alt="Sample image">
+    <img src="Unknown-10.jpg" alt="My photo">
 
     <p>If you’d like to support me, just click the button below 👇</p>
     <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">
