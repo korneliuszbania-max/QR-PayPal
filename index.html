@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kornel & Ola 💍</title>
 <style>
-  body { 
-    font-family: Arial, sans-serif; 
-    text-align: center; 
-    padding: 20px; 
-    margin: 0; 
-    background: #f5f5f5; 
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background: #f5f5f5;
   }
+
   .card {
     background: white;
     padding: 20px;
@@ -20,23 +21,25 @@
     margin: auto;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
+
   h1 { margin-bottom: 10px; }
   p { margin: 10px 0; }
 
-  /* Carousel */
+  /* Slider */
   .carousel-container {
     position: relative;
-    width: 100%;
     max-width: 600px;
     margin: 20px auto;
   }
+
   .carousel-container img {
     width: 100%;
     height: auto;
-    display: none;
     border-radius: 12px;
+    display: none;
     object-fit: contain;
   }
+
   .carousel-container img.active {
     display: block;
   }
@@ -57,23 +60,6 @@
   .prev { left: 10px; }
   .next { right: 10px; }
 
-  /* Dots */
-  .dots {
-    text-align: center;
-    margin-top: 10px;
-  }
-  .dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin: 0 5px;
-    background: #bbb;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  .dot.active { background: #0070ba; }
-
-  /* Button */
   a.button {
     display: inline-block;
     margin-top: 20px;
@@ -85,15 +71,12 @@
     border-radius: 10px;
   }
 
-  /* Contact */
   .contact { margin-top: 20px; }
   .contact a { color: #0070ba; text-decoration: none; }
 
-  /* Dark mode */
   @media (prefers-color-scheme: dark) {
     body { background: #121212; color: #ddd; }
     .card { background: #1e1e1e; box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
-    .dot.active { background: #00aaff; }
   }
 
   @media (max-width:600px) {
@@ -121,17 +104,6 @@
     <button class="next">&#10095;</button>
   </div>
 
-  <div class="dots">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </div>
-
   <a class="button" href="https://www.paypal.com/paypalme/yourname" target="_blank">Support us on PayPal 💳</a>
   <div class="contact">
     <p>Or contact us via email: 📧 <a href="mailto:koja_b@wp.pl">koja_b@wp.pl</a></p>
@@ -140,32 +112,18 @@
 
 <script>
 const slides = document.querySelectorAll('.carousel-container img');
-const dots = document.querySelectorAll('.dot');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
 let current = 0;
-let interval;
 
 function showSlide(i){
   slides.forEach(s => s.classList.remove('active'));
-  dots.forEach(d => d.classList.remove('active'));
   current = (i + slides.length) % slides.length;
   slides[current].classList.add('active');
-  dots[current].classList.add('active');
 }
 
-function nextSlide(){ showSlide(current + 1); }
-function prevSlide(){ showSlide(current - 1); }
-
-prevBtn.addEventListener('click', ()=>{ prevSlide(); resetInterval(); });
-nextBtn.addEventListener('click', ()=>{ nextSlide(); resetInterval(); });
-
-dots.forEach((dot, idx)=>{ dot.addEventListener('click', ()=>{ showSlide(idx); resetInterval(); }); });
-
-function startInterval(){ interval = setInterval(nextSlide,4000); }
-function resetInterval(){ clearInterval(interval); startInterval(); }
-
-startInterval();
+prevBtn.addEventListener('click', ()=> showSlide(current - 1));
+nextBtn.addEventListener('click', ()=> showSlide(current + 1));
 </script>
 </body>
 </html>
